@@ -1,0 +1,26 @@
+# - Config file for the OpenFHEsfdk package
+# It defines the following variables
+#  SFDK_INCLUDE_DIRS - include directories for OpenFHEabe
+#  SFDK_LIBRARIES    - libraries to link against
+
+get_filename_component(SFDK_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+if(NOT SFDK_BINARY_DIR)
+  include("${SFDK_CMAKE_DIR}/OpenFHEsfdkTargets.cmake")
+endif()
+
+# These are IMPORTED targets created by OpenFHEsfdkTargets.cmake
+set(SFDK_INCLUDE "@INSTALL_INCLUDE_DIR@")
+set(SFDK_LIBDIR "@INSTALL_LIB_DIR@")
+set(SFDK_LIBRARIES @SFDK_PACKAGE_LIBS@ @OpenFHE_LIBRARIES@ @THIRDPARTYLIBS@ @OpenMP_CXX_FLAGS@)
+set(SFDK_STATIC_LIBRARIES @SFDK_STATIC_LIBS@ @OpenFHE_STATIC_LIBRARIES@ @THIRDPARTYLIBS@ @OpenMP_CXX_FLAGS@)
+set(SFDK_SHARED_LIBRARIES @SFDK_SHARED_LIBS@ @OpenFHE_SHARED_LIBRARIES@ @THIRDPARTYLIBS@ @OpenMP_CXX_FLAGS@)
+
+set(OPENMP_INCLUDES "@OPENMP_INCLUDES@" )
+set(OPENMP_LIBRARIES "@OPENMP_LIBRARIES@" )
+
+set(SFDK_CXX_FLAGS "@CMAKE_CXX_FLAGS@ @OpenMP_CXX_FLAGS@")
+set(SFDK_C_FLAGS "@CMAKE_C_FLAGS@ @OpenMP_C_FLAGS@")
+
+set (SFDK_EXE_LINKER_FLAGS "@CMAKE_EXE_LINKER_FLAGS@ @OpenMP_EXE_LINKER_FLAGS@")
