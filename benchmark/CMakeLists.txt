@@ -31,6 +31,7 @@ foreach (app ${BMARK_SRC_FILES})
 
 #		target_link_libraries ( ${exe} ${BMLIBS} libOpenFHEsfdk.dylib benchmark.a)
 	target_link_libraries ( ${exe} ${BMLIBS} )
+	message(STATUS "BMLIBS: ${BMLIBS} *************")
 	set (BMAPPS ${BMAPPS} ${exe})
 endforeach()
 
