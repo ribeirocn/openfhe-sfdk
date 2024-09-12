@@ -1,4 +1,5 @@
 #list all sources in this directory for the library (found in the lib subdirectory)
+message(STATUS "CUR DIR " ${CMAKE_CURRENT_LIST_DIR})
 file(GLOB SFDKLIB_SOURCES CONFIGURE_DEPENDS "lib/scheme/*/*.cpp")
 
 include_directories(${CORE_INCLUDE_DIRS})
