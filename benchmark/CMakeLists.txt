@@ -15,7 +15,7 @@ else()
 	set( WARNING_FLAG -Wno-unused-but-set-variable )
 endif()
 
-set (BMLIBS PUBLIC OpenFHEsfdk ${OpenFHE_LIBRARIES} benchmarki ${OpenMP_CXX_FLAGS})
+set (BMLIBS PUBLIC OpenFHEsfdk ${OpenFHE_LIBRARIES} benchmark ${OpenMP_CXX_FLAGS})
 
 link_directories(${exe} ../build/lib)
 
