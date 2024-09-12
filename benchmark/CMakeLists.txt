@@ -15,13 +15,7 @@ else()
 	set( WARNING_FLAG -Wno-unused-but-set-variable )
 endif()
 
-if( BUILD_SHARED )
-	set (BMLIBS PUBLIC OpenFHEpke PUBLIC OpenFHEbinfhe PUBLIC OpenFHEcore PUBLIC OpenFHEsfdk ${mak} PUBLIC benchmark ${OpenMP_CXX_FLAGS})
-endif()
-
-if( BUILD_STATIC )
-	set (BMLIBS ${BMLIBS} PUBLIC OpenFHEpke_static PUBLIC OpenFHEbinfhe_static PUBLIC OpenFHEcore_static PUBLIC OpenFHEsfdk_static ${THIRDPARTYSTATICLIBS} PUBLIC benchmark ${OpenMP_CXX_FLAGS})
-endif()
+set (BMLIBS PUBLIC OpenFHEsfdk ${OpenFHE_LIBRARIES})
 
 link_directories(${exe} ../build/lib)
 
@@ -34,7 +28,9 @@ foreach (app ${BMARK_SRC_FILES})
 	target_include_directories( ${exe} PUBLIC ../third-party/google-benchmark/include )
 	set_target_properties( ${exe} PROPERTIES COMPILE_FLAGS
 		"${REGEX_FLAG} -DHAVE_STEADY_CLOCK -DNDEBUG ${WARNING_FLAG}" )
-	target_link_libraries ( ${exe} ${BMLIBS} libOpenFHEsfdk.dylib benchmark.a)
+
+#		target_link_libraries ( ${exe} ${BMLIBS} libOpenFHEsfdk.dylib benchmark.a)
+	target_link_libraries ( ${exe} ${BMLIBS} )
 	set (BMAPPS ${BMAPPS} ${exe})
 endforeach()
 

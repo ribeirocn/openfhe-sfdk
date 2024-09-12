@@ -37,7 +37,7 @@ using namespace lbcrypto;
 
 uint GetPSMDepth(uint p) {
     uint depth = 0;
-    for(int mask=1;mask<=p; mask <<= 1){
+    for(uint mask=1;mask<=p; mask <<= 1){
       depth++;
       if((mask&p)>0) depth++;
     }

@@ -7,11 +7,11 @@ ARG sfdkbranch=main
 #ARG fhetag=v0.9.1
 ARG CC_param=/usr/bin/gcc-10
 ARG CXX_param=/usr/bin/g++-10
-ARG no_threads=4
+ARG no_threads=8
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CC=$CC_param
-ENV CXX=$CXX_para
+ENV CXX=$CXX_param
 
 #install pre-requisites for OpenFHE
 RUN apt update && apt install -y git \
@@ -39,4 +39,4 @@ RUN mkdir /$fherepository/build && cd /$fherepository/build && cmake .. && make 
 RUN git clone https://github.com/ribeirocn/$sfdkrepository.git && cd $sfdkrepository && git checkout $sfdkbranch
 
 #installing OpenFHE and running tests
-#RUN mkdir /$sfdkrepository/build && cd /$sfdkrepository/build && cmake .. && make -j $no_threads && make install
+RUN mkdir /$sfdkrepository/build && cd /$sfdkrepository/build && cmake .. && make -j $no_threads && make install
