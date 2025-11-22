@@ -61,7 +61,10 @@ class CryptoContextImplSFDK : public CryptoContextImpl<Element>, std::enable_sha
     }
 
     void Enable(usint featureMask) {
-        this->scheme->Enable(featureMask);
+        auto baseScheme = this->GetScheme();
+        if (baseScheme) {
+            baseScheme->Enable(featureMask);
+        }
         if (featureMask & SFDK ) {
             GetSFDKScheme()->EnableSFDK();
         }

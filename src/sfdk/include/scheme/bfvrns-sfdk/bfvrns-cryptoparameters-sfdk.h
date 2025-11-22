@@ -86,14 +86,18 @@ public:
     void SetBase(usint base){m_base = base;}
     typename DCRTPoly::DggType &GetDiscreteGaussianGeneratorLargeSigma() {return m_dggLargeSigma;}
 
-    bool operator==(const CryptoParametersBase<DCRTPoly>& rhs) const override {
+    bool operator==(const CryptoParametersBase<DCRTPoly>& rhs) const {
         const auto* el =
             dynamic_cast<const CryptoParametersBFVRNSSFDK*>(&rhs);
 
-        if (el == nullptr) return false;
+        if (el == nullptr) {
+            return false;
+        }
 
-        return el->GetK() == m_k && CryptoParametersBFVRNSSFDK::operator==(rhs);
-    } 
+        return (el->GetK() == m_k) && (el->GetBase() == m_base) &&
+               (el->VerifyNorm == VerifyNorm) &&
+               CryptoParametersBFVRNS::operator==(rhs);
+    }
     /////////////////////////////////////
     // SERIALIZATION
     /////////////////////////////////////

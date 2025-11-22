@@ -95,8 +95,7 @@ KeyCipher<DCRTPoly> lbcrypto::SFDKBFVRNS::GenDecKeyFor(
     PublicKeySFDK<DCRTPoly> publicKey) const {
   const std::vector<DCRTPoly> &cipherTextElements = cipherText->GetElements();
   if (cipherTextElements.size() != 2) {
-    OPENFHE_THROW(config_error,
-                  "Specific DecKey is only defined for ciphertexts of size 2"
+    OPENFHE_THROW("Specific DecKey is only defined for ciphertexts of size 2"
                   "Please relinearize before");
   }
 
@@ -137,14 +136,13 @@ Ciphertext<DCRTPoly> lbcrypto::SFDKBFVRNS::Encrypt(
   // Test parameters
   //----------------------------------------------------------------------------------
   if (publicKey == nullptr) {
-    OPENFHE_THROW(config_error,
-                  "Wrong PubKey type. Please, generate key for this context");
+    OPENFHE_THROW("Wrong PubKey type. Please, generate key for this context");
   }
   auto cryptoParams = std::static_pointer_cast<CryptoParametersBFVRNSSFDK>(
       publicKey->GetCryptoParameters());
 
   if (cryptoParams->GetEncryptionTechnique() == EXTENDED) {
-    OPENFHE_THROW(config_error, "Not Supprted: Extended encrytion technique");
+    OPENFHE_THROW("Not Supported: Extended encryption technique");
   }
   auto elementParams = cryptoParams->GetElementParams();
   size_t sizeQ = elementParams->GetParams().size();
@@ -152,8 +150,7 @@ Ciphertext<DCRTPoly> lbcrypto::SFDKBFVRNS::Encrypt(
   size_t sizeP = encParams->GetParams().size();
 
   if (sizeP != sizeQ) {
-    OPENFHE_THROW(config_error,
-                  "Not Supported: Plaintext encodings with smaller number of "
+    OPENFHE_THROW("Not Supported: Plaintext encodings with smaller number of "
                   "RNS limbs than the public key");
   }
 
